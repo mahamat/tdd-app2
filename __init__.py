@@ -1,16 +1,15 @@
 # services/users/project/__init__.py
 
 import os
-import datetime
 
-from flask import Flask, jsonify
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 # init db
 db = SQLAlchemy()
 
 def create_app(script_info=None):
-  # instantiate the app
+  #  instantiate the app
   app = Flask(__name__)
   
   # set config
