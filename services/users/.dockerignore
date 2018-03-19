@@ -5,3 +5,4 @@ Dockerfile-prod
 htmlcov
 docker-compose-dev.yml
 docker-compose-prod.yml
+migrations
