@@ -58,6 +58,7 @@ services:
     environment:
       - NODE_ENV=development
       - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
+      - CHOKIDAR_USEPOLLING=true
     depends_on:
       - users
     links:
