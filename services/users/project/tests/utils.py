@@ -11,6 +11,7 @@ def add_user(username, email, password):
     db.session.commit()
     return user
 
+
 def add_admin(username, email, password):
     user = User(
       username=username, email=email,

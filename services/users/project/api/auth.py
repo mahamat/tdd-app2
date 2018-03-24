@@ -80,6 +80,7 @@ def login_user():
         response_object['message'] = 'Try again.'
         return jsonify(response_object), 500
 
+
 @auth_blueprint.route('/auth/status', methods=['GET'])
 @authenticate
 def get_user_status(resp):
@@ -90,6 +91,7 @@ def get_user_status(resp):
         'data': user.to_json()
     }
     return jsonify(response_object), 200
+
 
 @auth_blueprint.route('/auth/logout', methods=['GET'])
 @authenticate

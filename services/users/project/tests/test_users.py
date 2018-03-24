@@ -8,6 +8,7 @@ from project.tests.base import BaseTestCase
 from project import db
 from project.api.models import User
 
+
 class TestUsersService(BaseTestCase):
     """Tests for the users service. """
 

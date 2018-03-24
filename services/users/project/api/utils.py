@@ -29,6 +29,7 @@ def authenticate(f):
         return f(resp, *args, **kwargs)
     return decorated_function
 
+
 def is_admin(user_id):
     user = User.query.filter_by(id=user_id).first()
     return user.admin

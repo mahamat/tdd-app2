@@ -6,28 +6,53 @@ import UsersList from '../UsersList';
 
 const users = [
   {
-    'active': true,
-    'email': 'mahamat1@example.com',
-    'id': 1,
-    'username': 'mahamat1'
+    active: true,
+    admin: false,
+    email: 'mahamat1@example.com',
+    id: 1,
+    username: 'mahamat1'
   },
   {
-    'active': true,
-    'email': 'mahamat2@example.org',
-    'id': 2,
-    'username': 'mahamat2'
+    active: true,
+    admin: false,
+    email: 'mahamat2@example.org',
+    id: 2,
+    username: 'mahamat2'
   }
 ];
 
 test('UsersList renders properly', () => {
-  const wrapper = shallow(<UsersList users={users}/>);
-  const element = wrapper.find('h4');
-  expect(element.length).toBe(2);
-  expect(element.get(0).props.className).toBe('well');
-  expect(element.get(0).props.children).toBe('mahamat1');
+  const wrapper = shallow(<UsersList users={users} />);
+  expect(wrapper.find('h1').get(0).props.children).toBe('All Users');
+  // table
+  const table = wrapper.find('Table');
+  expect(table.length).toBe(1);
+  expect(table.get(0).props.striped).toBe(true);
+  expect(table.get(0).props.bordered).toBe(true);
+  expect(table.get(0).props.condensed).toBe(true);
+  expect(table.get(0).props.hover).toBe(true);
+  // table head
+  expect(wrapper.find('thead').length).toBe(1);
+  const th = wrapper.find('th');
+  expect(th.length).toBe(5);
+  expect(th.get(0).props.children).toBe('User ID');
+  expect(th.get(1).props.children).toBe('Email');
+  expect(th.get(2).props.children).toBe('Username');
+  expect(th.get(3).props.children).toBe('Active');
+  expect(th.get(4).props.children).toBe('Admin');
+  // table body
+  expect(wrapper.find('tbody').length).toBe(1);
+  expect(wrapper.find('tbody > tr').length).toBe(2);
+  const td = wrapper.find('tbody > tr > td');
+  expect(td.length).toBe(10);
+  expect(td.get(0).props.children).toBe(1);
+  expect(td.get(1).props.children).toBe('mahamat1@example.com');
+  expect(td.get(2).props.children).toBe('mahamat1');
+  expect(td.get(3).props.children).toBe('true');
+  expect(td.get(4).props.children).toBe('false');
 });
 
 test('UsersList renders a snapshot properly', () => {
-  const tree = renderer.create(<UsersList users={users}/>).toJSON();
+  const tree = renderer.create(<UsersList users={users} />).toJSON();
   expect(tree).toMatchSnapshot();
 });
