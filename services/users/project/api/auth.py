@@ -6,6 +6,8 @@ from sqlalchemy import exc, or_
 from project.api.models import User
 from project import db, bcrypt
 from project.api.utils import authenticate
+from project.api.mail import send
+
 
 auth_blueprint = Blueprint('auth', __name__)
 
@@ -41,7 +43,8 @@ def register_user():
             response_object['status'] = 'success'
             response_object['message'] = 'Successfully registered.'
             response_object['auth_token'] = auth_token.decode()
-            return jsonify(response_object), 201
+            send(username, email)
+            return jsonify(response_object), 200
         else:
             response_object['message'] = 'Sorry. That user already exists.'
             return jsonify(response_object), 400

@@ -3,3 +3,4 @@ env
 __snapshots__
 node_modules
 html_cov
+.env.default
