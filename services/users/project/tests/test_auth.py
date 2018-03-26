@@ -27,7 +27,7 @@ class TestAuthBlueprint(BaseTestCase):
             self.assertTrue(data['message'] == 'Successfully registered.')
             self.assertTrue(data['auth_token'])
             self.assertTrue(response.content_type == 'application/json')
-            self.assertEqual(response.status_code, 201)
+            self.assertEqual(response.status_code, 200)
 
     def test_user_registration_duplicate_email(self):
         add_user('test', 'test@test.com', 'test')
