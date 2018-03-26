@@ -22,9 +22,9 @@ class App extends Component {
         email: '',
         password: ''
       },
-      isAuthenticated: false
+      isAuthenticated: false,
+      error: false
     };
-    this.addUser = this.addUser.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handleUserFormSubmit = this.handleUserFormSubmit.bind(this);
@@ -43,22 +43,7 @@ class App extends Component {
         console.log(err);
       });
   }
-  addUser(event) {
-    event.preventDefault();
-    const data = {
-      username: this.state.username,
-      email: this.state.email
-    };
-    axios
-      .post(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`, data)
-      .then(res => {
-        this.getUsers();
-        this.setState({ username: '', email: '' });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
+ 
   handleChange(event) {
     const obj = {};
     obj[event.target.name] = event.target.value;
@@ -83,13 +68,14 @@ class App extends Component {
           formData: { username: '', email: '', password: '' },
           username: '',
           email: '',
-          isAuthenticated: true
+          isAuthenticated: true,
+          error:false,
         });
         window.localStorage.setItem('authToken', res.data.auth_token);
         this.getUsers();
       })
-      .catch(err => {
-        console.log(err);
+      .catch((error) => {
+        this.setState({ error: error.response.data.message});
       });
   }
 
@@ -129,6 +115,7 @@ class App extends Component {
                     <Form
                       formType={'Register'}
                       formData={this.state.formData}
+                      error={this.state.error}
                       handleFormChange={this.handleFormChange}
                       handleUserFormSubmit={this.handleUserFormSubmit}
                       isAuthenticated={this.state.isAuthenticated}
@@ -142,6 +129,7 @@ class App extends Component {
                     <Form
                       formType={'Login'}
                       formData={this.state.formData}
+                      error={this.state.error}
                       handleFormChange={this.handleFormChange}
                       handleUserFormSubmit={this.handleUserFormSubmit}
                       isAuthenticated={this.state.isAuthenticated}
