@@ -1,6 +1,6 @@
 # tdd-app2
 
-Test Driven Development app using Flask, Python, EC2, Docker-machine
+Test Driven Development app using Flask, Python, EC2, Docker-machine.
 
 [![Build Status](https://travis-ci.org/mahamat/tdd-app2.svg?branch=master)](https://travis-ci.org/mahamat/tdd-app2)
 
